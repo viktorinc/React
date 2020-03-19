@@ -1,0 +1,16 @@
+.contact-item
+{
+     width: 250px;
+     padding: 15px;
+     float: left;
+     list-style-type: none;
+}
+.contact-item img{
+    width: 100%;
+}
+.star
+{
+    color: yellow;
+    margin: 15px;
+    cursor: pointer;
+}
