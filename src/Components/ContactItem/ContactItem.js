@@ -44,9 +44,8 @@ class ContactItem extends Component {
                     <p>{this.state.address}</p>
                     <p>{this.state.email}</p>
                     <button className="btn btn-info" onClick={this.randomImage.bind(this)}>Random Image</button>
-                    <span>
-                        <i onClick={this.props.setFavourite} className={startstyle}></i>
-                    </span>
+                    <i onClick={this.props.setFavourite} className={startstyle}></i>
+                    <i onClick={this.props.deleteContact} className="fa fa-trash-o fa-2x trash"></i>
                 </li>
             </Fragment>
         )

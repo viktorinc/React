@@ -4,13 +4,24 @@
      padding: 15px;
      float: left;
      list-style-type: none;
+     background-color: gray;
+     color: white;
+     border-color: black;
+     border-radius: 1px;
 }
 .contact-item img{
     width: 100%;
 }
 .star
 {
-    color: yellow;
+    color: darkorange;
     margin: 15px;
+    cursor: pointer;
+}
+
+.trash
+{
+    color: darkred;
+    margin-left: 15px;
     cursor: pointer;
 }

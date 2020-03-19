@@ -2,8 +2,11 @@ import React, { Fragment, Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import uuid from 'react-uuid'
+import Page404 from "./Components/Page404/Page404";
+
 import ContactList from "./Components/ContactList/ContactList";
 import ContactAdd from './Components/ContactAdd/ContactAdd';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 class App extends Component {
     state = {
@@ -59,7 +62,7 @@ class App extends Component {
         this.setState(state => {
             let tempList = this.state.List.slice();
             tempList.push(newcontact);
-            return{
+            return {
                 List: tempList
             }
         });
@@ -75,17 +78,62 @@ class App extends Component {
         });
 
     }
+
+    deleteContact = (id) => {
+        const tempList = this.state.List.slice();
+        const index = tempList.findIndex(item => item.id === id)
+        tempList.splice(index, 1);
+        this.setState({
+            List: tempList
+        });
+    }
+
     render() {
         return (
             <Fragment>
-                <header className="hat">
-                    <h2>Contact book</h2>
-                </header>
-                <main>
+                <Router>
+                    <header className="hat">
+                    <nav class="navbar navbar-default">
+                                <div class="container-fluid">
+                                    <div class="navbar-header">
+                                        <Link class="navbar-brand" to="#">Contact book</Link>
+                                    </div>
+                                    <ul class="nav navbar-nav">
+                                        <li><Link to="/listContact">List contacts</Link></li>
+                                        <li><Link to="/addContact">Add contact</Link></li>
+ 
+                                    </ul>
+                                </div>
+                            </nav>                    </header>
+                    <main>
 
-                    <ContactList List={this.state.List} setFavourite={this.setFavourite}></ContactList>
-                    <ContactAdd addContact={this.addContact}></ContactAdd>
-                </main>
+                        <Switch>
+                            <Route path="/listContact"
+                            exact
+                            render={()=> <ContactList deleteContact={this.deleteContact.bind(this)} List={this.state.List} setFavourite={this.setFavourite}></ContactList>}>
+
+                            </Route>
+                            
+                            <Route path="/addContact"
+                            exact
+                            render={()=><ContactAdd addContact={this.addContact}></ContactAdd>}
+                            >
+
+                            </Route>
+
+                            <Route
+                            path="*"
+                            render={()=> <Page404></Page404>}
+                            >
+
+                            </Route>
+                        </Switch>
+
+
+                        {/* <ContactList deleteContact={this.deleteContact.bind(this)} List={this.state.List} setFavourite={this.setFavourite}></ContactList>
+                        <ContactAdd addContact={this.addContact}></ContactAdd> */}
+                    </main>
+                </Router>
             </Fragment>
         )
     }
